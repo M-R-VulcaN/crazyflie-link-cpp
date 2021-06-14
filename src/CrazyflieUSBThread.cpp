@@ -94,7 +94,7 @@ void CrazyflieUSBThread::run()
         }
 
         Packet p_recv;
-        size_t size = cf.recv(p_recv.raw(), CRTP_MAXSIZE, 1);
+        size_t size = cf.recv(p_recv.raw(), CRTP_MAXSIZE, 5);
         p_recv.setSize(size);
         
         if (p_recv) {

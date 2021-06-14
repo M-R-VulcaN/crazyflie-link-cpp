@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <vector>
 #include <string>
+#include <utilsPlus.hpp>
 
 #include "USBDevice.h"
 

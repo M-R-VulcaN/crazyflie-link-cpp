@@ -7,8 +7,10 @@
 
 #include <libusb.h>
 
+#include <utilsPlus.hpp>
 namespace bitcraze {
 namespace crazyflieLinkCpp {
+
 
 // forward declaration
 class USBManager;

@@ -2,7 +2,7 @@
 
 #include <sstream>
 #include <stdexcept>
-
+#include <iostream>
 #include <libusb.h>
 
 namespace bitcraze {
@@ -47,18 +47,8 @@ bool CrazyflieUSB::send(
             sstr << "Timeout, but already transferred " << transferred << " of " << length << " bytes!";
             throw std::runtime_error(sstr.str());
         }
-        return false;
-    }
-    if (status != LIBUSB_SUCCESS) {
-        throw std::runtime_error(libusb_error_name(status));
-    }
-    if (length != (uint32_t)transferred) {
-        std::stringstream sstr;
-        sstr << "Did transfer " << transferred << " but " << length << " was requested!";
-        throw std::runtime_error(sstr.str());
-    }
-    return true;
-}
+        return f#include <utilsPlus.hpp>
+
 
 size_t CrazyflieUSB::recv(uint8_t *buffer, size_t max_length, unsigned int timeout)
 {
@@ -72,6 +62,8 @@ size_t CrazyflieUSB::recv(uint8_t *buffer, size_t max_length, unsigned int timeo
         max_length,
         &transferred,
         /*timeout*/ timeout);
+    if(debugFlag1)
+        std::cout << status << std::endl;
     if (status != LIBUSB_SUCCESS && status != LIBUSB_ERROR_TIMEOUT) {
         throw std::runtime_error(libusb_error_name(status));
     }
