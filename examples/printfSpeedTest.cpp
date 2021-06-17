@@ -18,11 +18,6 @@ for (i = 0; i<100;i++)
 
     foo(string100);
 
-
-
-
-
-
     return 0;
 }
 void foo(char string100[])

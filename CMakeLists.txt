@@ -146,6 +146,7 @@ add_executable(example_logViaAppChannel
 )
 target_link_libraries(example_logViaAppChannel
   crazyflieLinkCpp
+  tracepoint-provider
 )
 
 # example_basicParamCSV
