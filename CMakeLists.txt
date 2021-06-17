@@ -1,6 +1,11 @@
 cmake_minimum_required (VERSION 3.5)
 project(crazyflie-link-cpp)
 
+#tracing
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+#tracing
+include (FindLTTngUST REQUIRED)
 
 # Enable C++14 and warnings
 set(CMAKE_CXX_STANDARD 14)
@@ -25,6 +30,7 @@ find_package(libusb REQUIRED)
 
 include_directories(
   include
+  lttng_tracing
   ${LIBUSB_INCLUDE_DIR}
 )
 
@@ -45,6 +51,10 @@ add_library(crazyflieLinkCpp
   src/LoggingCrazyflieWrapper.cpp
   src/debug.cpp
 )
+
+#tracing
+add_library(tracepoint-provider SHARED src/tracepoint-provider.cpp)
+target_link_libraries(tracepoint-provider LTTng::UST)
 
 # target_include_directories(libCrazyflieLinkCpp
 #   PUBLIC
@@ -146,3 +156,10 @@ target_link_libraries(example_basicParamCSV
   crazyflieLinkCpp
 )
 
+#tracing example
+add_executable(example_printfSpeedTest 
+examples/printfSpeedTest.cpp
+)
+target_link_libraries(example_printfSpeedTest
+tracepoint-provider
+)
