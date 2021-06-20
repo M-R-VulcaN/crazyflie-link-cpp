@@ -19,14 +19,19 @@ using namespace bitcraze::crazyflieLinkCpp;
 
 int main()
 {
+    // {
+    //     int i;
+    //     std::cin >> i; 
+    // }
+    tracepoint(gydle_om, foo, "main start");
+    tracepoint(gydle_om, foo, "start logging");
     resetUSB();
-
+    tracepoint(gydle_om, foo, "after reset");
     Crazyflie crazyflie("usb://0");
     // LoggingCrazyflieWrapper logging(crazyflie);
     crazyflie.init();
     LoggingCrazyflieWrapper loggingWrapper(crazyflie);
-    // tr
-    tracepoint(gydle_om, foo, "start logging");
+    
 
     loggingWrapper.start();
 

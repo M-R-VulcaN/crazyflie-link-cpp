@@ -2,6 +2,7 @@
 #include <list>
 #include <chrono>
 #include <thread>
+#include "tracepoint-provider.h"
 
 #define ACK_DELAY_MICRO_SEC 30
 
@@ -32,6 +33,8 @@ void LoggingCrazyflieWrapper::start(bool withDebugging)
 
     do
     {
+        tracepoint(gydle_om, bar, "lp");
+        
         result = _crazyflie->recvAppChannelData();
         if (result.empty())
         {

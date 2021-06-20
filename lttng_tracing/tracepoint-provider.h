@@ -64,6 +64,17 @@ TRACEPOINT_EVENT(
 	)
 )
 
+TRACEPOINT_EVENT(
+	TRACEPOINT_PROVIDER,
+	bar,
+	TP_ARGS(
+		const char *, str
+	),
+	TP_FIELDS(
+		ctf_string(str, str)
+	)
+)
+
 #endif /* MY_TRACEPOINT_PROVIDER_H */
 
 #include <lttng/tracepoint-event.h>
