@@ -154,4 +154,3 @@ add_executable(example_basicParamCSV
 target_link_libraries(example_basicParamCSV
   crazyflieLinkCpp
 )
-

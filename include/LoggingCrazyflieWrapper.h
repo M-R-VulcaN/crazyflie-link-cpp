@@ -28,4 +28,7 @@ public:
     void start(bool withDebugging = false);
     LoggingCrazyflieWrapper(Crazyflie &crazyflie, const std::string &outputFilePath = "");
     ~LoggingCrazyflieWrapper();
+
+  
+  
 };

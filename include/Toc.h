@@ -29,7 +29,7 @@ union ParamValue
 
     uint8_t _uint8Val;
     uint16_t _uint16Val;
-    uint32_t _uintVal;
+    uint32_t _uint32Val;
     uint64_t _uint64Val;
 
     int8_t _int8Val;
@@ -37,21 +37,35 @@ union ParamValue
     int32_t _int32Val;
     int64_t _int64Val;
 };
+enum TocItemTypes
+{
+    INT8_T_CODE,
+    INT16_T_CODE,
+    INT32_T_CODE,
+    INT64_T_CODE,
+    FP16_CODE,
+    FLOAT_CODE,
+    DOUBLE_CODE,
+    UINT8_T_CODE,
+    UINT16_T_CODE,
+    UINT32_T_CODE,
+    UINT64_T_CODE,
+};
 
 const std::map<uint8_t, std::string>
     PARAM_TYPES = {
         //   TypeId:       TypeName:
-        {0x08, "uint8_t"},
-        {0x09, "uint16_t"},
-        {0x0A, "uint32_t"},
-        {0x0B, "uint64_t"},
-        {0x00, "int8_t"},
-        {0x01, "int16_t"},
-        {0x02, "int32_t"},
-        {0x03, "int64_t"},
-        {0x05, "FP16"},
-        {0x06, "float"},
-        {0x07, "double"}};
+        {INT8_T_CODE, "int8_t"},
+        {INT16_T_CODE, "int16_t"},
+        {INT32_T_CODE, "int32_t"},
+        {INT64_T_CODE, "int64_t"},
+        {FP16_CODE, "FP16"},
+        {FLOAT_CODE, "float"},
+        {DOUBLE_CODE, "double"},
+        {UINT8_T_CODE, "uint8_t"},
+        {UINT16_T_CODE, "uint16_t"},
+        {UINT32_T_CODE, "uint32_t"},
+        {UINT64_T_CODE, "uint64_t"}};
 
 struct AccessType
 {

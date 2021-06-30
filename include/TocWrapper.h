@@ -14,11 +14,24 @@
 class TocWrapper : WrapperTemplate<Toc, TocWrapper>
 {
 private:
-    ConnectionWrapper* _conWpr;
+    ConnectionWrapper* _conWprToc;
+    ConnectionWrapper* _conWprRead;
     TocItem getTocItemFromCrazyflie(uint16_t id) const;
+    bool recvValue(ParamValue& result, const TocItemType& tocItemType) const;
 
+
+  template<typename ValType>
+    bool recvValue(ValType& result) const
+    {
+        // std::cout << (int)objectToSend << std::endl;
+        auto p_recv = _conWprRead->recvFilteredData(0);
+        if(sizeof(result)<p_recv.payloadSize())
+            return false;
+        std::copy_n(p_recv.payload(),p_recv.payloadSize(),(uint8_t*)&result);
+        return true;
+    }
 public:
-    TocWrapper(Toc &toc, ConnectionWrapper& con);
+    TocWrapper(Toc &toc, ConnectionWrapper& conToc, ConnectionWrapper& conRead);
     void initToc();
     
     virtual TocWrapper &operator=(Toc &toc)
@@ -26,6 +39,9 @@ public:
         WrapperTemplate<Toc, TocWrapper>::_core = &toc;
         return *this;
     }
+    std::pair<TocItem, ParamValue> getTocItemAndValueFromCrazyflie(const TocItem& tocItem) const;
 
+    std::pair<TocItem, ParamValue> getTocItemAndValueFromCrazyflie(const std::string &groupName, const std::string &paramName) const;
+    
     virtual ~TocWrapper();
 };

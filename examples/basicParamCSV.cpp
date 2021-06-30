@@ -25,10 +25,10 @@ int main()
         auto val = element.second;
 
         tocParamsFile << (unsigned int)tocItem._id << "," << to_string(tocItem._accessType) << "," << to_string(tocItem._type) << "," << tocItem._groupName << "," << tocItem._name << ",";
-        if(tocItem.isFloat())
+        if(tocItem._type == "float")
             tocParamsFile << val._floatVal << endl;
         else 
-            tocParamsFile << (unsigned int)val._uintVal << endl;
+            tocParamsFile << (unsigned int)val._uint32Val << endl;
     }
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double> diff = end - start;

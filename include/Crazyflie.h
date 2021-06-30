@@ -39,8 +39,6 @@ private:
     bool setParamInCrazyflie(uint16_t paramId, float newValue);
     bool setParamInCrazyflie(uint16_t paramId, uint32_t newValue, const size_t &valueSize);
 
-    uint32_t getUIntFromCrazyflie(uint16_t paramId) const;
-    float getFloatFromCrazyflie(uint16_t paramId) const;
     void initParamToc();
     void initLogToc();
 
@@ -50,9 +48,10 @@ public:
     bool isRunning() const;
     bool init();
 
+    bool isParamFloat(const std::string &group, const std::string &name) const;
 
-    uint32_t getUIntByName(const std::string &group, const std::string &name) const;
-    float getFloatByName(const std::string &group, const std::string &name) const;
+    std::pair<TocItem, ParamValue> getParam(const std::string &group, const std::string &name) const;
+    std::pair<TocItem, ParamValue> getLog(const std::string &group, const std::string &name) const;
 
     bool setParamByName(const std::string &group, const std::string &name, float newValue);
     bool setParamByName(const std::string &group, const std::string &name, uint32_t newValue, const size_t &valueSize);
